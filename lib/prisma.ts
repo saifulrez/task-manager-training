@@ -1,12 +1,11 @@
-// @ts-nocheck
 import "dotenv/config";
 import { PrismaClient } from "../generated/prisma/client";
 
-// Pautan umpan format sah untuk melepasi fasa ujian dry-run Next.js
-const databaseUrl = process.env.DATABASE_URL || "prisma+postgres://accelerate.prisma-data.net/?api_key=BUILD_TIME_FALLBACK";
+// Jika Vercel belum sempat membaca env semasa fasa build, kita bekalkan format umpan yang sah
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = "prisma+postgres://accelerate.prisma-data.net/?api_key=BUILD_TIME_PLACEHOLDER";
+}
 
-const prisma = new PrismaClient({
-  datasourceUrl: databaseUrl,
-});
+const prisma = new PrismaClient();
 
 export { prisma };
