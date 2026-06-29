@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma"
 import TaskCard from "@/components/task-manager/TaskCard"
 import Link from "next/link"
