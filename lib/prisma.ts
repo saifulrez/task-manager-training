@@ -1,15 +1,7 @@
 import { PrismaClient } from "../generated/prisma/client";
 
-let prismaInstance: any;
-
-const prisma = new Proxy({} as any, {
-  get(target, prop) {
-    if (!prismaInstance) {
-      // Kita hantar {} as any untuk memenuhi syarat 1 argumen tanpa sekatan TypeScript
-      prismaInstance = new PrismaClient({} as any);
-    }
-    return prismaInstance[prop];
-  },
-});
+// Kita masukkan {} as any untuk memenuhi syarat wajib 1 argumen daripada TypeScript.
+// Memandangkan DATABASE_URL sudah ada di Vercel Env, Prisma akan gunakannya secara automatik!
+const prisma = new PrismaClient({} as any);
 
 export { prisma };
